@@ -189,33 +189,38 @@ namespace WebApplication4.Controllers
 
 
 
-
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> GuardarCambios(Dictionary<string, bool> asistencias)
         {
+            // Verifica que el diccionario de asistencias no esté vacío
             if (asistencias == null || !asistencias.Any())
             {
                 return RedirectToAction(nameof(Index));
             }
 
+            // Obtén todos los alumnos de la base de datos
             var alumnos = await _context.Alumno.ToListAsync();
 
+            // Itera sobre cada alumno y actualiza su asistencia según los datos recibidos en el formulario
             foreach (var alumno in alumnos)
             {
+                // Verifica si el diccionario de asistencias contiene el IdBanner del alumno
                 if (asistencias.TryGetValue(alumno.IdBanner, out bool asistencia))
                 {
-                    // Actualizamos el valor de asistencia con lo recibido del formulario
+                    // Actualiza el valor de asistencia en el alumno
                     alumno.Asistencia = asistencia;
                     _context.Update(alumno);
                 }
             }
 
+            // Guarda los cambios en la base de datos
             await _context.SaveChangesAsync();
 
+            // Redirige a la página de índice después de guardar los cambios
             return RedirectToAction(nameof(Index));
         }
+
 
 
 

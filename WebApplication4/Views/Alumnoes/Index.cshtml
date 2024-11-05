@@ -31,6 +31,7 @@
     }
 </ul>
 
+<!-- Formulario para guardar los cambios de asistencia -->
 <form asp-action="GuardarCambios" method="post">
     <table class="table">
         <thead>
@@ -40,6 +41,7 @@
                 <th>Modalidad</th>
                 <th>Asignación</th>
                 <th>Asistencia</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -51,10 +53,14 @@
                     <td>@alumno.Modalidad</td>
                     <td>@alumno.Asignacion?.Nombre</td>
                     <td>
-                        <!-- Campo oculto para enviar false si el checkbox no está marcado -->
-                        <input type="hidden" name="asistencias[@alumno.IdBanner]" value="false" />
+                       
                         <!-- Checkbox de asistencia -->
                         <input type="checkbox" name="asistencias[@alumno.IdBanner]" value="true" @(alumno.Asistencia ? "checked" : "") />
+                        <!-- Campo oculto para enviar false si el checkbox no está marcado -->
+                        <input type="hidden" name="asistencias[@alumno.IdBanner]" value="false" />
+                    </td>
+                    <td>
+                        <a asp-action="Delete" asp-route-id="@alumno.IdBanner" class="btn btn-danger">Eliminar</a>
                     </td>
                 </tr>
             }
@@ -62,5 +68,3 @@
     </table>
     <button type="submit" class="btn btn-primary">Guardar Cambios</button>
 </form>
-
-

@@ -24,6 +24,8 @@ namespace WebApplication4.Models
         public Boolean Asistencia { get; set; }  
 
 
+
+
         public Asignacion? Asignacion { get; set; }
 
         [ForeignKey("Asignacion")]

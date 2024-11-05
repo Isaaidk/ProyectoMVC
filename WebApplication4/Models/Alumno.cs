@@ -21,7 +21,8 @@ namespace WebApplication4.Models
         public string Modalidad { get; set; }
 
         [Required]
-        public Boolean Asistencia { get; set; }
+        public Boolean Asistencia { get; set; }  
+
 
         public Asignacion? Asignacion { get; set; }
 

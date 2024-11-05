@@ -191,6 +191,31 @@ namespace WebApplication4.Controllers
 
 
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> GuardarCambios(Dictionary<string, bool> asistencias)
+        {
+            if (asistencias == null || !asistencias.Any())
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            var alumnos = await _context.Alumno.ToListAsync();
+
+            foreach (var alumno in alumnos)
+            {
+                if (asistencias.TryGetValue(alumno.IdBanner, out bool asistencia))
+                {
+                    // Actualizamos el valor de asistencia con lo recibido del formulario
+                    alumno.Asistencia = asistencia;
+                    _context.Update(alumno);
+                }
+            }
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
 
 
 
@@ -198,5 +223,5 @@ namespace WebApplication4.Controllers
 
 
 
-    
+
 }

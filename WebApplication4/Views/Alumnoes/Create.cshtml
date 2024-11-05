@@ -41,6 +41,7 @@
                 <label asp-for="IdAsignacion" class="control-label"></label>
                 <select asp-for="IdAsignacion" class ="form-control" asp-items="ViewBag.IdAsignacion"></select>
             </div>
+            <div class="mt-4">
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
@@ -48,8 +49,10 @@
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
+<div class="mt-4">
+    <a asp-action="Index" class="btn btn-secondary">
+        <i class="fas fa-list"></i> Back to List
+    </a>
 </div>
 
 @section Scripts {

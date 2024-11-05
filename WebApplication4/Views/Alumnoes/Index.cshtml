@@ -1,0 +1,117 @@
+﻿@model IEnumerable<WebApplication4.Models.Alumno>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Correo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Modalidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Asistencia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Asignacion)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Correo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Modalidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Asistencia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Asignacion.Nombre)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdBanner">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdBanner">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdBanner">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+
+</table>
+
+
+<h2>Alumnos</h2>
+
+<h3>Filtrar por Asignación</h3>
+<ul>
+    @if (ViewBag.Asignaciones != null)
+    {
+        foreach (var asignacion in ViewBag.Asignaciones)
+        {
+            <li>
+                <a asp-action="FiltrarPorAsignacion" asp-route-id="@asignacion.IdAsignacion">
+                    @asignacion.Nombre
+                </a>
+            </li>
+        }
+    }
+    else
+    {
+        <li>No hay asignaciones disponibles.</li>
+    }
+</ul>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.First().nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Correo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Modalidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Asignacion.Nombre)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var alumno in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => alumno.nombre)</td>
+                <td>@Html.DisplayFor(modelItem => alumno.Correo)</td>
+                <td>@Html.DisplayFor(modelItem => alumno.Modalidad)</td>
+                <td>@Html.DisplayFor(modelItem => alumno.Asignacion.Nombre)</td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = alumno.IdBanner }) |
+                    @Html.ActionLink("Edit", "Edit", new { id = alumno.IdBanner }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = alumno.IdBanner })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

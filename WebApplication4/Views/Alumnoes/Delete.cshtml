@@ -1,4 +1,4 @@
-﻿@model WebApplication4.Models.Asignacion
+﻿@model WebApplication4.Models.Alumno
 
 @{
     ViewData["Title"] = "Eliminar";
@@ -6,25 +6,37 @@
 
 <div class="container mt-5">
     <h1 class="text-danger">Eliminar</h1>
-    <h3>Estás seguro de que quieres eliminar?</h3>
+    <h3>¿Estás seguro de que quieres eliminar este alumno?</h3>
 
     <table class="table table-bordered">
         <thead>
             <tr>
                 <th scope="col">Campo</th>
-                <th scope="col">Asignatura</th>
+                <th scope="col">Información</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td>@Html.DisplayNameFor(model => model.Nombre)</td>
-                <td>@Html.DisplayFor(model => model.Nombre)</td>
+                <td>@Html.DisplayNameFor(model => model.nombre)</td>
+                <td>@Html.DisplayFor(model => model.nombre)</td>
+            </tr>
+            <tr>
+                <td>@Html.DisplayNameFor(model => model.Correo)</td>
+                <td>@Html.DisplayFor(model => model.Correo)</td>
+            </tr>
+            <tr>
+                <td>@Html.DisplayNameFor(model => model.Modalidad)</td>
+                <td>@Html.DisplayFor(model => model.Modalidad)</td>
+            </tr>
+            <tr>
+                <td>@Html.DisplayNameFor(model => model.Asignacion.Nombre)</td>
+                <td>@Html.DisplayFor(model => model.Asignacion.Nombre)</td>
             </tr>
         </tbody>
     </table>
 
     <form asp-action="Delete">
-        <input type="hidden" asp-for="IdAsignacion" />
+        <input type="hidden" asp-for="IdBanner" />
         <button type="submit" class="btn btn-danger">Eliminar</button>
         <a asp-action="Index" class="btn btn-secondary ms-2">Volver a la Lista</a>
     </form>
@@ -34,4 +46,4 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-}    
+}
